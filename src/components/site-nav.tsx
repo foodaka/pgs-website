@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { InstagramIcon } from "@/components/instagram-icon";
+import { INSTAGRAM_URL } from "@/lib/site";
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -35,12 +37,23 @@ export function SiteNav() {
             Portugal Golf Society
           </span>
         </a>
+        <div className="flex items-center gap-2 sm:gap-3">
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Portugal Golf Society on Instagram"
+          className="flex h-11 w-11 items-center justify-center rounded-full text-cream transition hover:bg-cream/15"
+        >
+          <InstagramIcon className="h-6 w-6" />
+        </a>
         <a
           href="#join"
           className="rounded-full bg-cream px-5 py-2.5 text-sm font-bold tracking-wide text-green uppercase transition hover:bg-coral hover:text-cream"
         >
           Join the society
         </a>
+        </div>
       </nav>
     </header>
   );

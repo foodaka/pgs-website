@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { FAQS, SITE_NAME, SITE_URL } from "@/lib/site";
+import { FAQS, INSTAGRAM_URL, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const title = "Portugal Golf Society | Lisbon Golf Society for Golfers in Portugal";
 // Search snippet: front-loaded and kept near Google's ~160 char display limit.
 const description =
-  "Portugal Golf Society: the Lisbon golf society for expats and locals. Regular rounds, Stableford competitions, an Order of Merit and socials. All handicaps welcome.";
+  "Portugal Golf Society: the bilingual Lisbon golf society for expats and locals. Rounds, Stableford competitions, an Order of Merit and socials. All handicaps welcome.";
 // Longer version for social cards and structured data.
 const longDescription =
   "The Portugal Golf Society is a Lisbon-based golf society for golfers living in Portugal, expats and locals alike. Regular society rounds, Stableford competitions, an Order of Merit, society days and clubhouse socials. All handicaps welcome. Established 2026. Join today.";
@@ -61,11 +61,13 @@ const jsonLd = {
       "@id": `${SITE_URL}/#organization`,
       name: SITE_NAME,
       alternateName: ["PGS", "Portugal Golf Society Lisbon"],
+      sameAs: [INSTAGRAM_URL],
       url: SITE_URL,
       logo: `${SITE_URL}/icon.png`,
       image: `${SITE_URL}/opengraph-image.png`,
       description: longDescription,
       sport: "Golf",
+      knowsLanguage: ["en", "pt"],
       foundingDate: "2026",
       slogan: "Serious about golf. Not too serious about ourselves.",
       areaServed: { "@type": "Country", name: "Portugal" },

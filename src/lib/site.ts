@@ -21,10 +21,13 @@ export const FAQS = [
   },
   {
     q: "Is the society for expats or Portuguese golfers?",
-    a: "Both. Members include people who have just moved to Portugal and golfers who have played here for years. The society is run in English and is open to anyone who loves the game.",
+    a: "Both. Members include people who have just moved to Portugal and golfers who have played here for years. The society is bilingual, run in English and Portuguese, and is open to anyone who loves the game.",
   },
   {
     q: "What kind of golf does the society play?",
     a: "Regular society rounds scored in Stableford, competitions throughout the season and an Order of Merit, plus clubhouse socials and society days. Serious about golf, not too serious about ourselves.",
   },
 ];
+
+export const INSTAGRAM_URL = "https://www.instagram.com/portugalgolfsociety";
+export const INSTAGRAM_HANDLE = "@portugalgolfsociety";

@@ -2,7 +2,8 @@ import Image from "next/image";
 import { JoinForm } from "@/components/join-form";
 import { Reveal } from "@/components/reveal";
 import { SiteNav } from "@/components/site-nav";
-import { FAQS } from "@/lib/site";
+import { InstagramIcon } from "@/components/instagram-icon";
+import { FAQS, INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/site";
 
 const LOOP = [
   { word: "Play", line: "Events, competitions, rounds and society days." },
@@ -146,7 +147,8 @@ export default function Home() {
               <p className="mt-5 max-w-lg text-lg leading-relaxed text-ink/75">
                 Whether you&rsquo;ve just moved to Portugal or you&rsquo;ve
                 played here for years, there&rsquo;s a spot on the tee sheet
-                and a seat at the clubhouse table for you.
+                and a seat at the clubhouse table for you. We play and
+                socialise in English and Portuguese.
               </p>
             </div>
 
@@ -245,7 +247,16 @@ export default function Home() {
               </h2>
               <p className="max-w-md text-lg leading-relaxed text-ink/65">
                 A clubhouse you can drop into without needing a reason:
-                on the course, in the group chat and on the gram.
+                on the course, in the group chat and{" "}
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-green underline decoration-coral decoration-2 underline-offset-4 hover:text-coral"
+                >
+                  on the gram
+                </a>
+                .
               </p>
             </div>
             <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -322,6 +333,7 @@ export default function Home() {
                   "Weekly rounds across Portugal's best courses",
                   "Season-long competitions and a proper Order of Merit",
                   "Clubhouse beers, society days and new friends",
+                  "A bilingual society: English and Portuguese",
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-4">
                     <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-coral" />
@@ -350,6 +362,15 @@ export default function Home() {
             <span className="block">Golf brings us together.</span>
             <span className="mt-3 block text-coral sm:mt-4">The society keeps us connected.</span>
           </p>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-10 inline-flex items-center gap-3 rounded-full border border-cream/25 px-7 py-4 text-base font-bold tracking-wide transition hover:border-coral hover:bg-coral"
+          >
+            <InstagramIcon className="h-5 w-5" />
+            Follow {INSTAGRAM_HANDLE}
+          </a>
           <div className="mt-14 flex w-full flex-col items-center justify-between gap-4 border-t border-cream/10 pt-8 text-sm text-cream/50 sm:flex-row">
             <p>© Portugal Golf Society · Est. 2026</p>
             <p>
