@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portugal Golf Society - landing page
 
-## Getting Started
-
-First, run the development server:
+Landing page + "join the society" form for portugalgolfstudy.com.
+Next.js (App Router) + Tailwind v4, deployed on Vercel.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Join form → Telegram
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Submissions go through a server action (`src/app/actions.ts`) to the
+Telegram Bot API. Set `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` (see
+`.env.example`) in Vercel → Project → Settings → Environment Variables.
+Without them, dev logs the message to the console and production shows a
+"briefly offline" error.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Brand
 
-## Learn More
+From the 2026 identity brief (Jordan Howey Beattie):
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Logo: crest "A" (PGS monogram with crossed tees, EST 26) - `public/brand/crest.png`,
+  `monogram.png`. White art used as CSS masks so they can take any colour.
+- Colours: black `#242624`, green `#003E33`, cream `#EFEAE4`, coral `#DC5B48`,
+  aloe `#CAD3C0`, peach `#C99379`.
+- Type: Salo (display) is replaced by Oswald (closest open condensed face);
+  Helvetica Neue for body.
+- Texture: green swirl, `public/brand/swirl.webp` (mirrored to tile seamlessly).
