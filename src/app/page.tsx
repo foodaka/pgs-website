@@ -2,6 +2,7 @@ import Image from "next/image";
 import { JoinForm } from "@/components/join-form";
 import { Reveal } from "@/components/reveal";
 import { SiteNav } from "@/components/site-nav";
+import { FAQS } from "@/lib/site";
 
 const LOOP = [
   { word: "Play", line: "Events, competitions, rounds and society days." },
@@ -51,12 +52,13 @@ export default function Home() {
           <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pt-28 pb-20 sm:px-8 lg:grid-cols-[1.15fr_1fr] lg:gap-6">
             <div>
               <p className="eyebrow rise text-aloe" style={{ animationDelay: "0.1s" }}>
-                Est. 2026 · Lisbon, Portugal
+                Portugal Golf Society · Lisbon · Est. 2026
               </p>
               <h1
                 className="display rise mt-6 text-[clamp(2.9rem,6.4vw,6.75rem)] font-semibold"
                 style={{ animationDelay: "0.2s" }}
               >
+                <span className="sr-only">Portugal Golf Society, the Lisbon golf society: </span>
                 <span className="block whitespace-nowrap">A society</span>
                 <span className="block whitespace-nowrap">you play in.</span>
                 <span className="block whitespace-nowrap text-coral">A community</span>
@@ -136,7 +138,8 @@ export default function Home() {
                 <span className="block whitespace-nowrap text-ink">about ourselves.</span>
               </h2>
               <p className="mt-8 max-w-lg text-lg leading-relaxed text-ink/75">
-                A society isn&rsquo;t just the golf. It&rsquo;s the people you
+                The Portugal Golf Society is a Lisbon-based golf society for
+                golfers living in Portugal. A society isn&rsquo;t just the golf. It&rsquo;s the people you
                 meet, the stories you tell, the shots you wish you could forget,
                 and the moments you look forward to.
               </p>
@@ -263,6 +266,34 @@ export default function Home() {
                     <p className="mt-3 text-lg opacity-80">{w.title}</p>
                   </div>
                 </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ───────── FAQ ───────── */}
+        <section id="faq" className="bg-cream pb-24 sm:pb-36">
+          <div className="mx-auto grid max-w-7xl gap-12 border-t border-green/15 px-4 pt-16 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+            <div data-reveal>
+              <p className="eyebrow text-coral">Questions</p>
+              <h2 className="display mt-5 text-[clamp(2.6rem,6vw,5rem)] font-semibold text-green">
+                Joining a golf society in Portugal
+              </h2>
+            </div>
+            <div data-reveal style={{ ["--delay" as string]: "100ms" }} className="divide-y divide-green/15 border-y border-green/15">
+              {FAQS.map((f) => (
+                <details key={f.q} className="group py-6">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-left [&::-webkit-details-marker]:hidden">
+                    <h3 className="text-xl font-bold text-ink sm:text-2xl">{f.q}</h3>
+                    <span
+                      aria-hidden
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green text-xl text-cream transition-transform duration-300 group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink/70">{f.a}</p>
+                </details>
               ))}
             </div>
           </div>
