@@ -155,14 +155,12 @@ export default function Home() {
             <div data-reveal style={{ ["--delay" as string]: "120ms" }} className="relative">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[32px] shadow-[0_40px_80px_-30px_rgb(0_62_51/0.55)]">
                 <Image
-                  src="/brand/course.webp"
-                  alt="Aerial view of a pine-lined fairway on Portugal's Atlantic coast"
+                  src="/photos/crewneck.webp"
+                  alt="Two Portugal Golf Society members on the green, one in a cream PGS crest t-shirt lining up a putt"
                   fill
                   sizes="(min-width: 1024px) 560px, 100vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-green/85 via-green/10 to-transparent" />
-                <span className="logo logo-monogram absolute inset-x-0 bottom-10 mx-auto h-28 w-28 text-cream sm:h-32 sm:w-32" aria-hidden />
               </div>
               <div className="absolute -top-6 -left-4 rotate-[-8deg] rounded-full bg-coral px-6 py-3 shadow-xl sm:-left-8">
                 <span className="display text-2xl font-semibold text-cream">Est. 2026</span>
@@ -217,6 +215,30 @@ export default function Home() {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ───────── Photo band ───────── */}
+        <section className="relative isolate h-[78svh] min-h-[460px] overflow-hidden bg-green text-cream sm:h-[88svh]">
+          <Image
+            src="/photos/high-kick.webp"
+            alt="A society member celebrates a holed putt with a high kick on a pine-lined fairway"
+            fill
+            sizes="100vw"
+            className="object-cover object-[72%_50%]"
+          />
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/15 to-transparent" />
+          <div className="relative mx-auto flex h-full max-w-7xl flex-col justify-end px-4 pb-14 sm:px-8 sm:pb-20">
+            <p data-reveal className="eyebrow text-aloe">Entertaining, by design</p>
+            <p
+              data-reveal
+              style={{ ["--delay" as string]: "100ms" }}
+              className="display mt-5 max-w-4xl text-[clamp(2.6rem,6.5vw,6rem)] font-semibold"
+            >
+              Golf can be competitive.
+              <br />
+              <span className="text-coral">The community should be fun.</span>
+            </p>
           </div>
         </section>
 
@@ -285,9 +307,72 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ───────── Merch ───────── */}
+        <section className="relative overflow-hidden bg-aloe py-24 sm:py-32">
+          <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+            <div data-reveal>
+              <p className="eyebrow text-green/70">Wear the society</p>
+              <h2 className="display mt-5 text-[clamp(3rem,7vw,6.25rem)] font-semibold text-green">
+                Fresh merch
+                <br />
+                <span className="text-coral">dropping soon.</span>
+              </h2>
+              <p className="mt-8 max-w-md text-lg leading-relaxed text-green/80">
+                Something members are proud to be seen in, on the course and
+                off it. The crest on the back, the monogram on the chest.
+              </p>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-10 inline-flex items-center gap-3 rounded-full bg-green px-7 py-4 text-base font-bold tracking-wide text-cream uppercase transition hover:-translate-y-0.5 hover:bg-ink"
+              >
+                <InstagramIcon className="h-5 w-5" />
+                Follow for the drop
+              </a>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 sm:gap-5">
+              <div
+                data-reveal
+                style={{ ["--delay" as string]: "80ms" }}
+                className="relative col-span-2 aspect-[4/5] overflow-hidden rounded-[28px] shadow-[0_40px_80px_-30px_rgb(0_62_51/0.6)] sm:col-span-1 sm:row-span-2 sm:aspect-auto"
+              >
+                <Image
+                  src="/photos/back-print.webp"
+                  alt="Golfer walking the fairway in a black t-shirt with the Portugal Golf Society crest printed on the back"
+                  fill
+                  sizes="(min-width: 1024px) 380px, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              {[
+                { src: "/photos/tee-front.webp", alt: "Charcoal PGS t-shirt, front, with the monogram on the chest", label: "Front", bg: "bg-cream" },
+                { src: "/photos/tee-back.webp", alt: "Charcoal PGS t-shirt, back, with the full Portugal Golf Society crest", label: "Back", bg: "bg-peach" },
+              ].map((t, i) => (
+                <div
+                  key={t.src}
+                  data-reveal
+                  style={{ ["--delay" as string]: `${160 + i * 80}ms` }}
+                  className={`group relative aspect-square overflow-hidden rounded-[28px] ${t.bg}`}
+                >
+                  <Image
+                    src={t.src}
+                    alt={t.alt}
+                    fill
+                    sizes="(min-width: 1024px) 300px, 45vw"
+                    className="object-contain p-4 pb-9 transition-transform duration-700 group-hover:scale-105 group-hover:rotate-[-2deg] sm:p-7 sm:pb-10"
+                  />
+                  <span className="eyebrow absolute bottom-4 left-5 text-ink/60">{t.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ───────── FAQ ───────── */}
-        <section id="faq" className="bg-cream pb-24 sm:pb-36">
-          <div className="mx-auto grid max-w-7xl gap-12 border-t border-green/15 px-4 pt-16 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <section id="faq" className="bg-cream py-24 sm:py-36">
+          <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
             <div data-reveal>
               <p className="eyebrow text-coral">Questions</p>
               <h2 className="display mt-5 text-[clamp(2.6rem,6vw,5rem)] font-semibold text-green">
