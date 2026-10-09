@@ -22,7 +22,9 @@ Without them, dev logs the message to the console and production shows a
 From the 2026 identity brief (Jordan Howey Beattie):
 
 - Logo: crest "A" (PGS monogram with crossed tees, EST 26) - `public/brand/crest.png`,
-  `monogram.png`. White art used as CSS masks so they can take any colour.
+  `monogram.png`, exported from the designer's 8334px masters (LOGO 1 / LOGO 2 WHITE).
+  White art used as CSS masks so they can take any colour. Favicon/icon is the
+  designer's green "SOCIAL LOGO 2".
 - Colours: black `#242624`, green `#003E33`, cream `#EFEAE4`, coral `#DC5B48`,
   aloe `#CAD3C0`, peach `#C99379`.
 - Type: Salo (display) is replaced by Oswald (closest open condensed face);

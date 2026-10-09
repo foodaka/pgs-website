@@ -105,7 +105,7 @@ export default function Home() {
           <a
             href="#about"
             aria-label="Scroll down"
-            className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-cream/50 sm:flex"
+            className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-cream/50 lg:flex"
           >
             <span className="eyebrow">Scroll</span>
             <span className="h-10 w-px animate-pulse bg-cream/40" />
