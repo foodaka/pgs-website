@@ -171,6 +171,55 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ───────── Content world ───────── */}
+        <section className="bg-cream pb-24 sm:pb-36">
+          <div className="mx-auto max-w-7xl px-4 sm:px-8">
+            <div data-reveal className="flex flex-col justify-between gap-6 border-t border-green/15 pt-16 lg:flex-row lg:items-end">
+              <div>
+                <p className="eyebrow text-coral">The society</p>
+                <h2 className="display mt-5 text-[clamp(2.6rem,6vw,5rem)] font-semibold text-ink">
+                  What membership
+                  <br />
+                  looks like
+                </h2>
+              </div>
+              <p className="max-w-md text-lg leading-relaxed text-ink/65">
+                A clubhouse you can drop into without needing a reason:
+                on the course, in the group chat and{" "}
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-green underline decoration-coral decoration-2 underline-offset-4 hover:text-coral"
+                >
+                  on the gram
+                </a>
+                .
+              </p>
+            </div>
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {WORLD.map((w, i) => (
+                <article
+                  key={w.tag}
+                  data-reveal
+                  style={{ ["--delay" as string]: `${(i % 3) * 90}ms` }}
+                  className={`group relative flex aspect-[5/4] flex-col justify-between overflow-hidden rounded-[28px] p-8 transition duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgb(0_62_51/0.6)] ${w.tone}`}
+                >
+                  <p className="eyebrow opacity-70">PGS /</p>
+                  <span
+                    aria-hidden
+                    className="logo logo-monogram absolute -right-10 -bottom-10 h-56 w-56 opacity-[0.09] transition-transform duration-700 group-hover:scale-110 group-hover:rotate-[-6deg]"
+                  />
+                  <div className="relative">
+                    <h3 className="display text-6xl font-semibold sm:text-7xl">{w.tag}</h3>
+                    <p className="mt-3 text-lg opacity-80">{w.title}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ───────── The loop ───────── */}
         <section className="relative isolate overflow-hidden bg-ink py-24 text-cream sm:py-36">
           <div className="swirl bg-[#2c2f2c]" aria-hidden />
@@ -233,52 +282,6 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
-
-        {/* ───────── Content world ───────── */}
-        <section className="bg-cream pb-24 sm:pb-36">
-          <div className="mx-auto max-w-7xl px-4 sm:px-8">
-            <div data-reveal className="flex flex-col justify-between gap-6 border-t border-green/15 pt-16 lg:flex-row lg:items-end">
-              <h2 className="display text-[clamp(2.6rem,6vw,5rem)] font-semibold text-ink">
-                What membership
-                <br />
-                looks like
-              </h2>
-              <p className="max-w-md text-lg leading-relaxed text-ink/65">
-                A clubhouse you can drop into without needing a reason:
-                on the course, in the group chat and{" "}
-                <a
-                  href={INSTAGRAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-green underline decoration-coral decoration-2 underline-offset-4 hover:text-coral"
-                >
-                  on the gram
-                </a>
-                .
-              </p>
-            </div>
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {WORLD.map((w, i) => (
-                <article
-                  key={w.tag}
-                  data-reveal
-                  style={{ ["--delay" as string]: `${(i % 3) * 90}ms` }}
-                  className={`group relative flex aspect-[5/4] flex-col justify-between overflow-hidden rounded-[28px] p-8 transition duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgb(0_62_51/0.6)] ${w.tone}`}
-                >
-                  <p className="eyebrow opacity-70">PGS /</p>
-                  <span
-                    aria-hidden
-                    className="logo logo-monogram absolute -right-10 -bottom-10 h-56 w-56 opacity-[0.09] transition-transform duration-700 group-hover:scale-110 group-hover:rotate-[-6deg]"
-                  />
-                  <div className="relative">
-                    <h3 className="display text-6xl font-semibold sm:text-7xl">{w.tag}</h3>
-                    <p className="mt-3 text-lg opacity-80">{w.title}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
           </div>
         </section>
 
