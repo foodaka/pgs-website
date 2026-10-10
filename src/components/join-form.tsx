@@ -25,10 +25,10 @@ export function JoinForm() {
       >
         <span className="logo logo-monogram h-28 w-28 text-coral" aria-hidden />
         <h3 className="display mt-8 text-5xl text-cream sm:text-6xl">
-          You&rsquo;re on the card.
+          You&rsquo;re on the list.
         </h3>
         <p className="mt-5 max-w-sm text-lg leading-relaxed text-cream/70">
-          Thanks for reaching out. Someone from the society will be in touch
+          We&rsquo;ve received your request to join. Someone from the society will be in touch
           shortly with the next round and how to get involved.
         </p>
       </div>

@@ -1,5 +1,7 @@
 "use server";
 
+import { sendJoinConfirmation } from "@/lib/join-email";
+
 export type JoinState = {
   status: "idle" | "ok" | "error";
   message?: string;
@@ -42,7 +44,7 @@ export async function joinSociety(
       fields,
     };
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) {
+  if (!/^[^\s@,;<>\x00-\x1f\x7f]+@[^\s@,;<>\x00-\x1f\x7f]+\.[^\s@,;<>\x00-\x1f\x7f]+$/.test(fields.email)) {
     return {
       status: "error",
       message: "That email doesn't look quite right.",
@@ -102,6 +104,10 @@ export async function joinSociety(
       fields,
     };
   }
+
+  // Telegram has received the signup. An email failure must not invite a
+  // duplicate submission or undo that successful request.
+  await sendJoinConfirmation(fields.name, fields.email);
 
   return { status: "ok" };
 }
