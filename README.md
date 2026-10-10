@@ -17,6 +17,16 @@ Telegram Bot API. Set `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` (see
 Without them, dev logs the message to the console and production shows a
 "briefly offline" error.
 
+After Telegram accepts a submission, Postmark sends the applicant a branded
+"You're on the list" confirmation (HTML and plain text). Set
+`POSTMARK_SERVER_TOKEN` and `POSTMARK_FROM_EMAIL` in the deployment environment;
+the latter must be a verified sender address without a display name. The email
+uses Postmark's `outbound` transactional stream and the public website's crest.
+See the [Postmark Email API](https://postmarkapp.com/developer/api/email-api).
+Missing configuration or email delivery errors are logged server-side without
+failing the already-received signup. In development without Telegram configured,
+the form only logs the submission and does not send email.
+
 ## Brand
 
 From the 2026 identity brief (Jordan Howey Beattie):
