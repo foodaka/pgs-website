@@ -63,17 +63,16 @@ export async function joinSociety(
     fields.heard && `<b>Heard about us:</b> ${escapeHtml(fields.heard)}`,
     fields.message && `\n<b>Message:</b>\n${escapeHtml(fields.message)}`,
   ].filter(Boolean);
-  const text = lines.join("\n");
+  const saved = await saveRequest(fields);
+  if (saved) lines.push("", `Review in Flagstick: ${REQUESTS_ADMIN_URL}`);
+  const notified = await notifyTelegram(lines.join("\n"));
 
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-
-  if (!token || !chatId) {
+  if (saved === null && notified === null) {
     if (process.env.NODE_ENV !== "production") {
-      console.log("[join] Telegram not configured, would send:\n" + text);
+      console.log("[join] Nothing configured, would record:\n" + lines.join("\n"));
       return { status: "ok" };
     }
-    console.error("[join] TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID missing");
+    console.error("[join] Neither Supabase nor Telegram is configured");
     return {
       status: "error",
       message: "Sign-ups are briefly offline. Please try again shortly.",
@@ -81,6 +80,69 @@ export async function joinSociety(
     };
   }
 
+  // Either one landing is enough: the database is the record, Telegram the
+  // nudge. Only when both fail has the request actually been lost.
+  if (!saved && !notified) {
+    return {
+      status: "error",
+      message: "Something went wrong sending that. Please try again.",
+      fields,
+    };
+  }
+
+  // An email failure must not invite a duplicate submission or undo the
+  // request that was just received.
+  await sendJoinConfirmation(fields.name, fields.email);
+
+  return { status: "ok" };
+}
+
+const REQUESTS_ADMIN_URL = "https://flagstick.live/admin/members/requests";
+
+// Stores the request in Flagstick's database (where admins invite or decline
+// it). Uses the public anon key: the only thing it can do is call this one
+// function, which can add a request but read nothing back.
+// true = saved, false = failed, null = not configured.
+async function saveRequest(fields: Record<string, string>): Promise<boolean | null> {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_ANON_KEY;
+  if (!url || !key) return null;
+  try {
+    const res = await fetch(`${url.replace(/\/+$/, "")}/rest/v1/rpc/submit_membership_request`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+      },
+      body: JSON.stringify({
+        p_society_slug: process.env.SOCIETY_SLUG || "pgs",
+        p_full_name: fields.name,
+        p_email: fields.email,
+        p_phone: fields.phone,
+        p_handicap: fields.handicap,
+        p_location: fields.location,
+        p_heard_from: fields.heard,
+        p_message: fields.message,
+      }),
+      cache: "no-store",
+    });
+    if (!res.ok) {
+      console.error("[join] Supabase error", res.status, await res.text());
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error("[join] Supabase error", error);
+    return false;
+  }
+}
+
+// true = sent, false = failed, null = not configured.
+async function notifyTelegram(text: string): Promise<boolean | null> {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) return null;
   try {
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
@@ -95,19 +157,11 @@ export async function joinSociety(
     });
     if (!res.ok) {
       console.error("[join] Telegram error", res.status, await res.text());
-      throw new Error("telegram");
+      return false;
     }
-  } catch {
-    return {
-      status: "error",
-      message: "Something went wrong sending that. Please try again.",
-      fields,
-    };
+    return true;
+  } catch (error) {
+    console.error("[join] Telegram error", error);
+    return false;
   }
-
-  // Telegram has received the signup. An email failure must not invite a
-  // duplicate submission or undo that successful request.
-  await sendJoinConfirmation(fields.name, fields.email);
-
-  return { status: "ok" };
 }

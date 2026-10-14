@@ -9,22 +9,29 @@ npm run dev     # http://localhost:3000
 npm run build
 ```
 
-## Join form → Telegram
+## Join form → Flagstick + Telegram
 
-Submissions go through a server action (`src/app/actions.ts`) to the
-Telegram Bot API. Set `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` (see
-`.env.example`) in Vercel → Project → Settings → Environment Variables.
-Without them, dev logs the message to the console and production shows a
-"briefly offline" error.
+Submissions go through a server action (`src/app/actions.ts`). It first saves
+the request to Flagstick's Supabase database by calling the
+`submit_membership_request` function with the public anon key
+(`SUPABASE_URL`, `SUPABASE_ANON_KEY`); admins then invite or decline it at
+flagstick.live → Admin → Members → Join requests. It then posts a Telegram
+message (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`) as a notification, with a
+link to that page when the save worked.
 
-After Telegram accepts a submission, Postmark sends the applicant a branded
+Either one succeeding counts as received; the form only errors when both fail.
+Set the variables (see `.env.example`) in Vercel → Project → Settings →
+Environment Variables. With neither configured, dev logs the submission to the
+console and production shows a "briefly offline" error.
+
+Once a submission is received, Postmark sends the applicant a branded
 "You're on the list" confirmation (HTML and plain text). Set
 `POSTMARK_SERVER_TOKEN` and `POSTMARK_FROM_EMAIL` in the deployment environment;
 the latter must be a verified sender address without a display name. The email
 uses Postmark's `outbound` transactional stream and the public website's crest.
 See the [Postmark Email API](https://postmarkapp.com/developer/api/email-api).
 Missing configuration or email delivery errors are logged server-side without
-failing the already-received signup. In development without Telegram configured,
+failing the already-received signup. In development with nothing configured,
 the form only logs the submission and does not send email.
 
 ## Brand
